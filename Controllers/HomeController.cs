@@ -20,6 +20,8 @@ namespace VisitorManagementSystem.Controllers
 
         public IActionResult Privacy()
         {
+            ViewBag.Welcome = "Welcome to the VMS";
+
             return View();
         }
 
