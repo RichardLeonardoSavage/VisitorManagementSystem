@@ -49,10 +49,12 @@ namespace VisitorManagementSystem.Controllers
         public IActionResult Create()
         {
             ViewData["StaffNameId"] = new SelectList(_context.StaffNames, "Id", "Name");
+
             //create an instance of the visitor
             Visitors visitors = new Visitors();
             //pass in the current date and time to the Datein property
             visitors.DateIn = DateTime.Now;
+            visitors.Business = "Mind your own";
             return View(visitors);
         }
 

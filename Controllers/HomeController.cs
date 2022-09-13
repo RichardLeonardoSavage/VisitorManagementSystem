@@ -15,13 +15,18 @@ namespace VisitorManagementSystem.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Welcome = "Welcome to the VMS";
+
+            ViewBag.VisitorsNew = new Visitors()
+            {
+                FirstName = "Howard",
+                LastName = "The Barbarian"
+            };
             return View();
         }
 
         public IActionResult Privacy()
         {
-            ViewBag.Welcome = "Welcome to the VMS";
-
             return View();
         }
 
