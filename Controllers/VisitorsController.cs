@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VisitorManagementSystem.Data;
 using VisitorManagementSystem.Models;
+using VisitorManagementSystem.Services;
 
 namespace VisitorManagementSystem.Controllers
 {
     public class VisitorsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IOperations _operations;
 
-        public VisitorsController(ApplicationDbContext context)
+        public VisitorsController(ApplicationDbContext context, IOperations operations)
         {
             _context = context;
+            _operations = operations;
         }
 
         // GET: Visitors
