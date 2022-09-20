@@ -17,6 +17,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IOperations, Operations>();
 
+//telling the program here that the services exist
+builder.Services.AddSingleton<ITextFileOperations, TextFileOperations>();
+builder.Services.AddTransient<IDataSeeder, DataSeeder>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
