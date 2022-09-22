@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using VisitorManagementSystem.Models;
 using VisitorManagementSystem.Services;
+using static VisitorManagementSystem.Enum.SweetAlertEnum;
 
 namespace VisitorManagementSystem.Controllers
 {
@@ -11,17 +12,23 @@ namespace VisitorManagementSystem.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ITextFileOperations _textFileOperations;
-        
-        
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment, ITextFileOperations textFileOperations)
+        private readonly IDataSeeder _dataSeeder;
+        private readonly ISweetAlert _sweetAlert;
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment, ITextFileOperations textFileOperations, IDataSeeder dataSeeder, ISweetAlert sweetAlert)
         {
             _logger = logger;
             _webHostEnvironment = webHostEnvironment;
             _textFileOperations = textFileOperations;
+            _dataSeeder = dataSeeder;
+            _sweetAlert = sweetAlert;
         }
 
         public IActionResult Index()
         {
+            TempData["notification"] = _sweetAlert.AlertPopupWithImage("The Visitor Management System", "Automate and record visitor management", "images/logo.png", NotificationType.success);
+
+            //run the dataseeder
+            _dataSeeder.SeedAsync();
             ViewBag.Welcome = "Welcome to the VMS";
 
             ViewBag.VisitorsNew = new Visitors()
